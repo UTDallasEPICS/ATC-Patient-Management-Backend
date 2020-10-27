@@ -25,4 +25,4 @@ taskSchema.methods.updateSelf = function(data,callback){
     })
 }
 
-module.exports = mongoose.model('Task',taskSchema)
+module.exports = mongoose.model('TaskResult',taskSchema)
