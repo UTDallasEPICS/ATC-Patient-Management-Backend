@@ -8,6 +8,7 @@ var therapistSchema = new mongoose.Schema({
     lastName:{type: String, default:"None"}, 
     email:{type: String, default:"None"},
     phoneNumber:{type: String, default:"None"},
+    //added lines 12-20
     sessions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Session'

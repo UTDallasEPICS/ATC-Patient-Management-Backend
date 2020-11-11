@@ -1,5 +1,5 @@
 // import our Therapist model - we get some handy dandy database utility functions
-var Therapist = require('../models/therapist.js')
+var Therapist = require('../models/therapist.ts')
 // takes an instance of express router as argument and returns it with modifications
 module.exports = function(router){
     router.get('/',(req,res)=>{
