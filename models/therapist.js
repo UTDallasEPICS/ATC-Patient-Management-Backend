@@ -1,28 +1,39 @@
 // import our ORM
-var mongoose = require('mongoose')
+import { Schema, Document, model } from 'mongoose';
+
+export interface ITherapist extends Document {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    isAdmin: Boolean;
+    reports: string[];
+    patients: string[];
+}
 
 // create a new schema - this is basically imposing a structure on top of mongodb
 // since mongodb does not really have table structure built in
-var therapistSchema = new mongoose.Schema({
+var therapistSchema = new Schema({
     firstName:{type: String, default:"None"}, // define the expected properties and some metadata
     lastName:{type: String, default:"None"}, 
     email:{type: String, default:"None"},
     phoneNumber:{type: String, default:"None"},
+    isAdmin:{type: Boolean, default:false},
     //added lines 12-20
-    sessions: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Session'
+    reports: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Report'
     }],
     patients
     :[{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Patient'
     }]
 })
 // we can add methods that will exist on all created or retrived instances of this schema
-therapistSchema.methods.updateSelf = function(data,callback){
+therapistSchema.methods.updateSelf = function(data: any,callback: any){
     this.text = data
-    this.save(err=>{
+    this.save((err: any)=>{
         if(err){
             return callback(err)
         }
@@ -30,4 +41,4 @@ therapistSchema.methods.updateSelf = function(data,callback){
     })
 }
 
-module.exports = mongoose.model('Therapist',therapistSchema)
+export default model<ITherapist>('Therapist',therapistSchema);

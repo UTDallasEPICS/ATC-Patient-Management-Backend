@@ -1,28 +1,25 @@
 // import our ORM
-var mongoose = require('mongoose')
+import { Schema, Document, model } from 'mongoose';
 
+export interface IBehaviour extends Document {
+    name: string;
+    description: string;
+    reports: string[];
+}
 // create a new schema - this is basically imposing a structure on top of mongodb
 // since mongodb does not really have table structure built in
-var taskSchema = new mongoose.Schema({
+var behaviourSchema = new Schema({
     name:{type: String, default: "None"}, // define the expected properties and some metadata
     description:{type: String, default: "None"},
-    patient:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Patient'
-    }, 
-    therapist: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Therapist'
-    },
-    task_results: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'TaskResult'
+    reports:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Program'
     }]
 })
 // we can add methods that will exist on all created or retrived instances of this schema
-taskSchema.methods.updateSelf = function(data,callback){
+behaviourSchema.methods.updateSelf = function(data: any,callback: any){
     this.text = data
-    this.save(err=>{
+    this.save((err: any)=>{
         if(err){
             return callback(err)
         }
@@ -30,4 +27,4 @@ taskSchema.methods.updateSelf = function(data,callback){
     })
 }
 
-module.exports = mongoose.model('Task',taskSchema)
+export default model<IBehaviour>('Behaviour',behaviourSchema);
