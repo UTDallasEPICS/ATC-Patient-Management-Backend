@@ -1,5 +1,6 @@
 // import our ORM
-import { Schema, Document, model } from 'mongoose';
+import pkg from 'mongoose';
+const { Schema, Document, model } = pkg
 
 export interface IAdministrator extends Document {
     firstName: string;

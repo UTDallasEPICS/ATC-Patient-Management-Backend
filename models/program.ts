@@ -1,23 +1,27 @@
 // import our ORM
-import { Schema, Document, model } from 'mongoose';
+import pkg from 'mongoose';
+const { Schema, Document, model } = pkg
 
-export interface IBehaviour extends Document {
-    name: string;
+export interface IProgram extends Document {
+    patient: string;
     description: string;
-    reports: string[];
+    behaviours: string[];
 }
 // create a new schema - this is basically imposing a structure on top of mongodb
 // since mongodb does not really have table structure built in
-var behaviourSchema = new Schema({
-    name:{type: String, default: "None"}, // define the expected properties and some metadata
+var programSchema = new Schema({
     description:{type: String, default: "None"},
-    reports:[{
+    patient: {
         type: Schema.Types.ObjectId,
-        ref: 'Program'
+        ref: 'Patient'
+    },
+    behaviours:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Behaviour'
     }]
 })
 // we can add methods that will exist on all created or retrived instances of this schema
-behaviourSchema.methods.updateSelf = function(data: any,callback: any){
+programSchema.methods.updateSelf = function(data: any,callback: any){
     this.text = data
     this.save((err: any)=>{
         if(err){
@@ -27,4 +31,4 @@ behaviourSchema.methods.updateSelf = function(data: any,callback: any){
     })
 }
 
-export default model<IBehaviour>('Behaviour',behaviourSchema);
+export default model<IProgram>('Program',programSchema);
