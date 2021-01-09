@@ -1,15 +1,15 @@
-import Therapist from "./therapist.js";
-import Behavior from "./behavior.js";
-import Patient from "./patient.js";
-import Administrator from "./administrator.js";
-import Program from "./program.js";
-import Report from "./report.js";
+import {Therapist, therapistModel} from "./therapist";
+import {Behavior, behaviorModel} from "./behavior";
+import {Patient, patientModel} from "./patient";
+import {Administrator, administratorModel} from "./administrator";
+import {Program, programModel} from "./program";
+import {Report, reportModel} from "./report";
 
 export {
-    Therapist,
-    Behavior,
-    Patient,
-    Administrator,
-    Program,
-    Report
+    Therapist, therapistModel,
+    Behavior, behaviorModel,
+    Patient, patientModel,
+    Administrator, administratorModel,
+    Program, programModel,
+    Report, reportModel
 }

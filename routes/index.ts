@@ -1,8 +1,8 @@
-import BehaviorRoutes from "./behavior_routes.js";
-import PatientRoutes from "./patient_routes.js";
-import ProgramRoutes from "./program_routes.js";
-import ReportRoutes from "./report_routes.js";
-import TherapistRoutes from "./therapist_routes.js";
+import BehaviorRoutes from "./behavior_routes";
+import PatientRoutes from "./patient_routes";
+import ProgramRoutes from "./program_routes";
+import ReportRoutes from "./report_routes";
+import TherapistRoutes from "./therapist_routes";
 import {Router } from "express"
 
 export default Router()

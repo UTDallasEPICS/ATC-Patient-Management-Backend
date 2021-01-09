@@ -1,45 +1,25 @@
-// import our ORM
-import pkg from 'mongoose';
-const { Schema, Document, model } = pkg
+import { getModelForClass, prop, DocumentType } from '@typegoose/typegoose';
+import {Patient} from ".";
+class Therapist {
+  @prop()
+  public firstName: string;
+  @prop()
+  public lastName: string;
+  @prop()
+  public email: string;
+  @prop()
+  public phoneNumber: string;
+  @prop()
+  public isAdmin: boolean; // TODO: we may actually rename this employees, get rid of adminstrator type, and reference isTherapist and isAdmin props
 
-export interface ITherapist extends Document {
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: string;
-    isAdmin: Boolean;
-    reports: string[];
-    patients: string[];
+  @prop({ ref: () => Patient })
+  public patients: Patient[];
+
+  public async updateSelf(this: DocumentType<Therapist>, data: any) {
+    return await this.save()
+  }
 }
 
-// create a new schema - this is basically imposing a structure on top of mongodb
-// since mongodb does not really have table structure built in
-var therapistSchema = new Schema({
-    firstName:{type: String, default:"None"}, // define the expected properties and some metadata
-    lastName:{type: String, default:"None"}, 
-    email:{type: String, default:"None"},
-    phoneNumber:{type: String, default:"None"},
-    isAdmin:{type: Boolean, default:false},
-    //added lines 12-20
-    reports: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Report'
-    }],
-    patients
-    :[{
-        type: Schema.Types.ObjectId,
-        ref: 'Patient'
-    }]
-})
-// we can add methods that will exist on all created or retrived instances of this schema
-therapistSchema.methods.updateSelf = function(data: any,callback: any){
-    this.text = data
-    this.save((err: any)=>{
-        if(err){
-            return callback(err)
-        }
-        return callback(null)
-    })
-}
+const therapistModel = getModelForClass(Therapist)
 
-export default model<ITherapist>('Therapist',therapistSchema);
+export {therapistModel, Therapist}

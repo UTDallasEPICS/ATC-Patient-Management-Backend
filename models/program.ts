@@ -1,34 +1,24 @@
-// import our ORM
-import pkg from 'mongoose';
-const { Schema, Document, model } = pkg
+// TODO: customizability concerns! imported behaviors shoudl actualyl behave like templates,
+// with the actual data being a customizable JSON blob
+// keep in mind that we will also need a deprecation mechanism so that completed/edited behaviors
+// are still avaialble for data analysis but are not used for making new reports
+import { getModelForClass, prop, DocumentType } from '@typegoose/typegoose';
+import {Patient} from "."
+class Program {
+  @prop()
+  public name: string;
+  @prop()
+  public description: string;
+  @prop({ ref: () => Patient })
+  public patient: Patient;
+  @prop({ ref: () => Patient })
+  public behaviours: Program[];
 
-export interface IProgram extends Document {
-    patient: string;
-    description: string;
-    behaviours: string[];
-}
-// create a new schema - this is basically imposing a structure on top of mongodb
-// since mongodb does not really have table structure built in
-var programSchema = new Schema({
-    description:{type: String, default: "None"},
-    patient: {
-        type: Schema.Types.ObjectId,
-        ref: 'Patient'
-    },
-    behaviours:[{
-        type: Schema.Types.ObjectId,
-        ref: 'Behaviour'
-    }]
-})
-// we can add methods that will exist on all created or retrived instances of this schema
-programSchema.methods.updateSelf = function(data: any,callback: any){
-    this.text = data
-    this.save((err: any)=>{
-        if(err){
-            return callback(err)
-        }
-        return callback(null)
-    })
+  public async updateSelf(this: DocumentType<Program>, data: any) {
+    return await this.save()
+  }
 }
 
-export default model<IProgram>('Program',programSchema);
+const programModel = getModelForClass(Program)
+
+export default {programModel, Program}
