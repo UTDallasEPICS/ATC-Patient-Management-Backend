@@ -1,11 +1,11 @@
-// import our Therapist model - we get some handy dandy database utility functions
-import {Therapist} from '../models/index.js';
+// import our therapist model - we get some handy dandy database utility functions
+import {therapistModel} from '../models';
 import { Router, Request, Response } from 'express';
 
 export default Router()
 .get('/', async (req: Request, res: Response) => {
     try {
-        let therapists = await Therapist.find({});
+        let therapists = await therapistModel.find({});
         return res.json({ success: true, "data": therapists });
     }
     catch (err: any) {
@@ -15,7 +15,7 @@ export default Router()
 })
 .get('/:id', async(req: Request, res: Response) => {
     try {
-        let therapists = await Therapist.findById(req.params.id);
+        let therapists = await therapistModel.findById(req.params.id);
         return res.json({ success: true, "data": therapists });
     }
     catch (err: any) {
@@ -25,7 +25,7 @@ export default Router()
 })
 .post('/', async(req: Request, res: Response)=>{
     try {
-        let savedTherapist = await new Therapist(req.body).save();
+        let savedTherapist = await new therapistModel(req.body).save();
         return res.json({ success: true, "data": savedTherapist._id });
     }
     catch (err: any) {
@@ -36,7 +36,7 @@ export default Router()
 })
 .delete('/', async(req: Request, res: Response)=>{
     try {
-        await Therapist.deleteMany({});
+        await therapistModel.deleteMany({});
         return res.json({ success: true });
     }
     catch (err: any) {
@@ -46,7 +46,7 @@ export default Router()
 })
 .delete('/:id', async(req: Request, res: Response)=>{
     try {
-        await Therapist.findByIdAndDelete(req.params.id);
+        await therapistModel.findByIdAndDelete(req.params.id);
         return res.json({success: true});
     }
     catch (err: any) {

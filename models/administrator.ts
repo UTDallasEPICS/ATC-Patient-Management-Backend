@@ -12,7 +12,7 @@ class Administrator {
   @prop()
   public isTherapist: boolean;
 
-  @prop({ ref: () => Patient })
+  @prop({ ref: () => "Patient" })
   public patients: Patient[];
 
   public async updateSelf(this: DocumentType<Administrator>, data: any) {

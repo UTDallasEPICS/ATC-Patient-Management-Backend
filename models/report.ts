@@ -7,11 +7,11 @@ class Report {
   public sessionTime: Date;
   @prop()
   public data: object;
-  @prop()
+  @prop({ ref: () => "Patient" })
   public patient: Patient;
-  @prop()
+  @prop({ ref: () => "Therapist" })
   public therapist: Therapist;
-  @prop()
+  
   public async updateSelf(this: DocumentType<Report>, data: any) {
     return await this.save()
   }

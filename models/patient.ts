@@ -12,14 +12,14 @@ class Patient {
   @prop()
   public parentEmail: string;
 
-  @prop({ ref: () => Program })
+  @prop({ ref: () => "Program" })
   public program: Program;
-  @prop({ ref: () => Report })
+  @prop({ ref: () => "Report" })
   public reports: Report[];
-  @prop({ ref: () => Therapist })
+  @prop({ ref: () => "Therapist" })
   public therapist: Therapist;
-  @prop({ ref: () => Administrator })
-  public adminsitrator: Administrator
+  @prop({ ref: () => "Administrator" })
+  public administrator: Administrator
 
   public async updateSelf(this: DocumentType<Patient>, data: any) {
     return await this.save()

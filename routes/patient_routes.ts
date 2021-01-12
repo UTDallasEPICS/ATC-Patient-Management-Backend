@@ -1,10 +1,10 @@
-import {Patient} from "../models/index.js";
+import {patientModel} from "../models";
 import { Router, Request, Response } from 'express';
 
 export default Router()
 .get('/', async (req: Request, res: Response)=>{
     try{
-        let patients = await Patient.find({});
+        let patients = await patientModel.find({});
         return res.json({success:true, "data":patients});
     }
     catch(err: any){
@@ -13,7 +13,7 @@ export default Router()
 })
 .get('/:id', async(req: Request, res: Response)=>{
     try {
-        let patients = await Patient.findById(req.params.id);
+        let patients = await patientModel.findById(req.params.id);
         return res.json({ success: true, "data": patients });
     }
     catch (err: any) {
@@ -22,7 +22,7 @@ export default Router()
 })
 .post('/', async(req: Request, res: Response)=>{
     try {
-        let savedPatient = await new Patient(req.body).save();
+        let savedPatient = await new patientModel(req.body).save();
         return res.json({ success: true, "data": savedPatient._id });
     }
     catch (err: any) {
@@ -32,7 +32,7 @@ export default Router()
 })
 .delete('/', async(req: Request, res: Response)=>{
     try {
-        let patients = await Patient.deleteMany({});
+        let patients = await patientModel.deleteMany({});
         return res.json({ success: true });
     }
     catch (err: any) {
@@ -41,7 +41,7 @@ export default Router()
 })
 .delete('/:id', async(req: Request, res: Response)=>{
     try {
-        let patients = await Patient.findByIdAndDelete(req.params.id);
+        let patients = await patientModel.findByIdAndDelete(req.params.id);
         return res.json({ success: true });
     }
     catch (err: any) {

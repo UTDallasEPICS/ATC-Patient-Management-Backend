@@ -1,10 +1,10 @@
-import {Behavior} from "../models/index.js";
+import {behaviorModel} from "../models";
 import { Router, Request, Response } from 'express';
 
 export default Router()
 .get('/', async (req: Request, res: Response) => {
     try {
-        let behaviours = await Behavior.find({});
+        let behaviours = await behaviorModel.find({});
         return res.json({ success: true, "data": behaviours });
     }
     catch (err: any) {
@@ -13,7 +13,7 @@ export default Router()
 })
 .get('/:id', async(req: Request, res: Response) => {
     try {
-        let behaviours = await Behavior.findById(req.params.id);
+        let behaviours = await behaviorModel.findById(req.params.id);
         return res.json({ success: true, "data": behaviours });
     }
     catch (err: any) {
@@ -22,7 +22,7 @@ export default Router()
 })
 .post('/', async(req: Request, res: Response)=>{
     try {
-        let savedBehaviour = await new Behavior(req.body).save();
+        let savedBehaviour = await new behaviorModel(req.body).save();
         return res.json({ success: true, "data": savedBehaviour._id });
     }
     catch (err: any) {
@@ -32,7 +32,7 @@ export default Router()
 })
 .delete('/', async(req: Request, res: Response)=>{
     try {
-        let behaviours = await Behavior.deleteMany({});
+        let behaviours = await behaviorModel.deleteMany({});
         return res.json({ success: true });
     }
     catch (err: any) {
@@ -42,7 +42,7 @@ export default Router()
 })
 .delete('/:id', async(req: Request, res: Response)=>{
     try {
-        let behaviours = await Behavior.findByIdAndDelete(req.params.id);
+        let behaviours = await behaviorModel.findByIdAndDelete(req.params.id);
         return res.json({success: true});
     }
     catch (err: any) {

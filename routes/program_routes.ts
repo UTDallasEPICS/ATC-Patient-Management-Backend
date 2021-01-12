@@ -1,10 +1,10 @@
-import {Program } from "../models/index.js";
+import {programModel} from "../models";
 import { Router, Request, Response, NextFunction } from 'express';
  
 export default Router()
 .get('/', async (req: Request, res: Response)=>{
     try{
-        let programs = await Program.find({});
+        let programs = await programModel.find({});
         return res.json({success:true, "data":programs});
     }
     catch(err: any){
@@ -13,7 +13,7 @@ export default Router()
 })
 .get('/:id', async(req: Request, res: Response)=>{
     try {
-        let programs = await Program.findById(req.params.id);
+        let programs = await programModel.findById(req.params.id);
         return res.json({ success: true, "data": programs });
     }
     catch (err: any) {
@@ -22,7 +22,7 @@ export default Router()
 })
 .post('/', async(req: Request, res: Response)=>{
     try {
-        let savedProgram = await new Program(req.body).save();
+        let savedProgram = await new programModel(req.body).save();
         return res.json({ success: true, "data": savedProgram._id });
     }
     catch (err: any) {
@@ -32,7 +32,7 @@ export default Router()
 })
 .delete('/', async(req: Request, res: Response)=>{
     try {
-        await Program.deleteMany({});
+        await programModel.deleteMany({});
         return res.json({ success: true });
     }
     catch (err: any) {
@@ -41,7 +41,7 @@ export default Router()
 })
 .delete('/:id', async(req: Request, res: Response)=>{
     try {
-        await Program.findByIdAndDelete(req.params.id);
+        await programModel.findByIdAndDelete(req.params.id);
         return res.json({ success: true });
     }
     catch (err: any) {
