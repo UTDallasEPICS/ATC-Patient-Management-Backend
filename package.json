@@ -9,14 +9,14 @@
    },
    "repository": {
       "type": "git",
-      "url": "git+https://github.com/nathanadcock/ATCBackEnd.git"
+      "url": "git+https://github.com/UTDallasEPICS/ATC-Patient-Management-Backend.git"
    },
    "author": "",
    "license": "ISC",
    "bugs": {
-      "url": "https://github.com/nathanadcock/ATCBackEnd/issues"
+      "url": "https://github.com/UTDallasEPICS/ATC-Patient-Management-Backend/issues"
    },
-   "homepage": "https://github.com/nathanadcock/ATCBackEnd#readme",
+   "homepage": "https://github.com/UTDallasEPICS/ATC-Patient-Management-Backend#readme",
    "dependencies": {
       "@typegoose/typegoose": "^7.4.6",
       "@types/express": "^4.17.8",
