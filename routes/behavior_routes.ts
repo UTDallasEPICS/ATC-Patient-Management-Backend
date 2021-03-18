@@ -1,4 +1,4 @@
-import {behaviorModel} from "../models";
+import {behaviorModel, patientModel} from "../models";
 import { Router, Request, Response } from 'express';
 
 export default Router()
@@ -48,4 +48,14 @@ export default Router()
     catch (err: any) {
         return res.json({ success: false, err });
     }
-});
+})
+
+.patch('/:id', async(req,res) => {
+    try{
+        let behaviours = await behaviorModel.findByIdAndUpdate(req.params.id, req.body,{new:true} );
+        return res.json({success: true, "data": behaviours});
+    }
+    catch(err: any){
+        return res.json({ success: false, err });
+    }
+})
