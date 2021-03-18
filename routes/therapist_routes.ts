@@ -1,5 +1,5 @@
 // import our therapist model - we get some handy dandy database utility functions
-import {therapistModel} from '../models';
+import {patientModel, therapistModel} from '../models';
 import { Router, Request, Response } from 'express';
 
 export default Router()
@@ -50,6 +50,16 @@ export default Router()
         return res.json({success: true});
     }
     catch (err: any) {
+        return res.json({ success: false, err });
+    }
+})
+
+.patch('/:id', async(req,res) => {
+    try{
+        let therapists = await therapistModel.findByIdAndUpdate(req.params.id, req.body,{new:true} );
+        return res.json({success: true, "data": therapists});
+    }
+    catch(err: any){
         return res.json({ success: false, err });
     }
 })
