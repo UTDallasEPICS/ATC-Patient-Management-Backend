@@ -30,6 +30,7 @@ export default Router()
     }
 
 })
+
 .delete('/', async(req: Request, res: Response)=>{
     try {
         let patients = await patientModel.deleteMany({});
@@ -46,5 +47,15 @@ export default Router()
     }
     catch (err: any) {
         return res.json({ success: false, err }); 
+    }
+})
+
+.patch('/:id', async(req,res) => {
+    try{
+        let patients = await patientModel.findByIdAndUpdate(req.params.id, req.body,{new:true} );
+        return res.json({success: true, "data": patients});
+    }
+    catch(err: any){
+        return res.json({ success: false, err });
     }
 })
