@@ -22,10 +22,10 @@ export default Router()
     }
 })
 
-.get('/reports/:id', async(req: Request, res: Response) =>{
+.get('/report/:id', async(req: Request, res: Response) =>{
     try {
-        let reports = await reportModel.find({patientID: req.params.id});
-        return res.json({success: true, "data": reports});
+        let report = await reportModel.find({patientID: req.params.id});
+        return res.json({success: true, "data": report});
     }
     catch (err: any){
         return res.json({success:false, err});
