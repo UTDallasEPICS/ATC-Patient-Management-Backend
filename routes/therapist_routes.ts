@@ -23,6 +23,17 @@ export default Router()
         return res.json({ success: false, err }); 
     }
 })
+
+.get('/patient/:id', async(req: Request, res: Response) =>{
+    try {
+        let patient = await patientModel.find({patientID: req.params.id});
+        return res.json({success: true, "data": patient});
+    }
+    catch (err: any){
+        return res.json({success:false, err});
+    }
+})
+
 .post('/', async(req: Request, res: Response)=>{
     try {
         let savedTherapist = await new therapistModel(req.body).save();
