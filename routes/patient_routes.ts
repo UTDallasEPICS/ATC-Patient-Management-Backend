@@ -1,4 +1,5 @@
 import {patientModel} from "../models";
+import {reportModel} from "../models";
 import { Router, Request, Response } from 'express';
 
 export default Router()
@@ -20,6 +21,17 @@ export default Router()
         return res.json({ success: false, err }); 
     }
 })
+
+.get('/reports/:id', async(req: Request, res: Response) =>{
+    try {
+        let reports = await reportModel.find({patientID: req.params.id});
+        return res.json({success: true, "data": reports});
+    }
+    catch (err: any){
+        return res.json({success:false, err});
+    }
+})
+
 .post('/', async(req: Request, res: Response)=>{
     try {
         let savedPatient = await new patientModel(req.body).save();

@@ -1,4 +1,4 @@
-import {programModel} from "../models";
+import {patientModel, programModel} from "../models";
 import { Router, Request, Response, NextFunction } from 'express';
  
 export default Router()
@@ -47,5 +47,5 @@ export default Router()
     catch (err: any) {
         return res.json({ success: false, err }); 
     }
-});
+})
 
