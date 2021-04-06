@@ -1,5 +1,6 @@
 import { getModelForClass, prop, DocumentType } from '@typegoose/typegoose';
-import { Program, Report, Administrator, Therapist } from '.';
+import { Session } from 'inspector';
+import { Program, Administrator, Therapist } from '.';
 class Patient {
   @prop()
   public firstName: string;
@@ -14,8 +15,8 @@ class Patient {
 
   @prop({ ref: () => "Program" })
   public program: Program;
-  @prop({ ref: () => "Report" })
-  public reports: Report[];
+  @prop({ ref: () => "session" })
+  public session: Session[];
   @prop({ ref: () => "Therapist" })
   public therapist: Therapist;
   @prop({ ref: () => "Administrator" })
@@ -28,4 +29,4 @@ class Patient {
 
 const patientModel = getModelForClass(Patient)
 
-export {patientModel, Patient}
+export {patientModel, Patient}  

@@ -2,6 +2,8 @@ import {patientModel} from "../models";
 import { Router, Request, Response } from 'express';
 
 export default Router()
+
+
 .get('/', async (req: Request, res: Response)=>{
     try{
         let patients = await patientModel.find({});

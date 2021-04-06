@@ -3,7 +3,7 @@ import {Behavior, behaviorModel} from "./behavior";
 import {Patient, patientModel} from "./patient";
 import {Administrator, administratorModel} from "./administrator";
 import {Program, programModel} from "./program";
-import {Report, reportModel} from "./report";
+import {Session, sessionModel} from "./session";
 
 export {
     Therapist, therapistModel,
@@ -11,5 +11,5 @@ export {
     Patient, patientModel,
     Administrator, administratorModel,
     Program, programModel,
-    Report, reportModel
+    Session, sessionModel
 }
