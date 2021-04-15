@@ -8,6 +8,10 @@ class Therapist {
   @prop()
   public email: string;
   @prop()
+  public username: string;
+  @prop()
+  public password: string;
+  @prop()
   public phoneNumber: string;
   @prop()
   public isAdmin: boolean; // TODO: we may actually rename this employees, get rid of adminstrator type, and reference isTherapist and isAdmin props
