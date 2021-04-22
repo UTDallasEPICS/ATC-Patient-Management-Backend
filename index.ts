@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import {json} from "body-parser";
+import bodyParser, {json} from "body-parser";
 import routes from "./routes";
 
 const dotenv = require("dotenv");

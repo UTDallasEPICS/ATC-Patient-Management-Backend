@@ -5,9 +5,13 @@ const {
     createJWT,
 } = require("../utils/auth");
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+// Sign Up
 exports.signup = (req, res, next) => {
     let { name, email, password, password_confirmation } = req.body;
     let errors = [];
+
+    // Error Checking
     if (!name) {
         errors.push({ name: "required" });
     }
@@ -31,6 +35,8 @@ exports.signup = (req, res, next) => {
     if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
     }
+
+    // Create Therapist Sign In
     therapist.findOne({ email: email })
         .then(user => {
             if (user) {
@@ -66,9 +72,13 @@ exports.signup = (req, res, next) => {
             });
         })
 }
+
+// Sign In
 exports.signin = (req, res) => {
     let { email, password } = req.body;
     let errors = [];
+
+    // Error Checking
     if (!email) {
         errors.push({ email: "required" });
     }
@@ -81,6 +91,8 @@ exports.signin = (req, res) => {
     if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
     }
+
+    // Find Therapist Sign In
     therapist.findOne({ email: email }).then(user => {
         if (!user) {
             return res.status(404).json({
