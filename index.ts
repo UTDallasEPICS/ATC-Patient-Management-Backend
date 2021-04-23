@@ -11,6 +11,7 @@ mongoose.connect('mongodb://' + uri + '/ATCBackend').catch((err) => { console.lo
 
 express()
 .use(json())
+//?.use(bodyParser.urlencoded({ extended: true }))
 .use('/', routes)
 .listen(8080, ()=>{
     console.log("Application listening on 8080");

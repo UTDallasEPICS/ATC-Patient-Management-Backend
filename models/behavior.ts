@@ -6,7 +6,6 @@ class Behavior {
   @prop()
   public description: string;
 
-
   public async updateSelf(this: DocumentType<Behavior>, data: any) {
     return await this.save()
   }

@@ -5,7 +5,13 @@ exports.createJWT = (email, userId, duration) => {
         userId,
         duration
     };
-    return jswt.sign(payload, process.env.TOKEN_SECRET, {
-        expiresIn: duration,
-    });
+    try {
+        return jswt.sign(payload, process.env.TOKEN_SECRET, {
+            expiresIn: duration,
+        });
+    }
+    catch(e) {
+        console.error(e);
+        throw e;
+    }
 };

@@ -1,4 +1,7 @@
-const therapist = require('../models/therapist');
+import { Console } from "console";
+import { Router, Request, Response } from 'express';
+import {therapistModel} from '../models';
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const {
@@ -7,7 +10,8 @@ const {
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 // Sign Up
-exports.signup = (req, res, next) => {
+exports.signup = (req: Request, res: Response, next) => {
+
     let { name, email, password, password_confirmation } = req.body;
     let errors = [];
 
@@ -37,12 +41,12 @@ exports.signup = (req, res, next) => {
     }
 
     // Create Therapist Sign In
-    therapist.findOne({ email: email })
+    therapistModel.findOne({ email: email })
         .then(user => {
             if (user) {
                 return res.status(422).json({ errors: [{ user: "email already exists" }] });
             } else {
-                const user = new therapist({
+                const user = new therapistModel({
                     name: name,
                     email: email,
                     password: password,
@@ -74,7 +78,7 @@ exports.signup = (req, res, next) => {
 }
 
 // Sign In
-exports.signin = (req, res) => {
+exports.signin = async (req, res) => {
     let { email, password } = req.body;
     let errors = [];
 
@@ -92,8 +96,8 @@ exports.signin = (req, res) => {
         return res.status(422).json({ errors: errors });
     }
 
-    // Find Therapist Sign In
-    therapist.findOne({ email: email }).then(user => {
+    // Validate Therapist Sign In
+    therapistModel.findOne({ email: email }).then(user => {
         if (!user) {
             return res.status(404).json({
                 errors: [{ user: "not found" }],
@@ -102,10 +106,7 @@ exports.signin = (req, res) => {
             bcrypt.compare(password, user.password).then(isMatch => {
                 if (!isMatch) {
                     return res.status(400).json({
-                        errors: [{
-                            password:
-                                "incorrect"
-                        }]
+                        errors: [{ password: "incorrect" }]
                     });
                 }
                 let access_token = createJWT(
@@ -116,7 +117,9 @@ exports.signin = (req, res) => {
                 jwt.verify(access_token, process.env.TOKEN_SECRET, (err,
                     decoded) => {
                     if (err) {
-                        res.status(500).json({ erros: err });
+                        res.status(500).json({
+                            errors: [{ error: 'Verification Error' , err}]
+                        });
                     }
                     if (decoded) {
                         return res.status(200).json({
@@ -127,10 +130,14 @@ exports.signin = (req, res) => {
                     }
                 });
             }).catch(err => {
-                res.status(500).json({ erros: err });
+                res.status(500).json({
+                    errors: [{ error: 'Comaprison Error' , err}]
+                });
             });
         }
     }).catch(err => {
-        res.status(500).json({ erros: err });
+        res.status(500).json({
+            errors: [{ error: 'Something went wrong', err }]
+        });
     });
 }
