@@ -5,6 +5,8 @@ import {Administrator, administratorModel} from "./administrator";
 import {Program, programModel} from "./program";
 import {Report, reportModel} from "./report";
 
+const {signup, signin} = require("../controllers/auth")
+
 export {
     Therapist, therapistModel,
     Behavior, behaviorModel,

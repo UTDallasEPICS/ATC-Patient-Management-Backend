@@ -1,0 +1,15 @@
+  {
+   "firstName":"Shubh",
+  
+   "lastName":"Garg",
+  
+   "email": "abcd1234@gmail.com",
+  
+   "username": "ShubhGarg",
+  
+   "password": "12345678",
+  
+   "phoneNumber": "9876543210",
+  
+   "isAdmin": "true"
+  }

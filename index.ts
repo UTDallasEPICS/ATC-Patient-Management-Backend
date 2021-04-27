@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import {json} from "body-parser";
+import bodyParser, {json} from "body-parser";
 import routes from "./routes";
 
 const dotenv = require("dotenv");
@@ -11,7 +11,8 @@ mongoose.connect('mongodb://' + uri + '/ATCBackend').catch((err) => { console.lo
 
 express()
 .use(json())
-.use('/', routes) 
+//?.use(bodyParser.urlencoded({ extended: true }))
+.use('/', routes)
 .listen(8080, ()=>{
     console.log("Application listening on 8080");
 });
