@@ -14,7 +14,7 @@ class Therapist {
   @prop()
   public phoneNumber: string;
   @prop()
-  public isAdmin: boolean; // TODO: we may actually rename this employees, get rid of adminstrator type, and reference isTherapist and isAdmin props
+  public isAdmin: boolean; // TODO: get rid of administrator type, and reference isTherapist and isAdmin props
 
   @prop({ ref: () => "Patient" })
   public patients: Patient[];

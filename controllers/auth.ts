@@ -9,7 +9,7 @@ const {
 } = require("../utils/auth");
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-// Sign Up
+// Therapist Sign Up
 exports.signup = (req: Request, res: Response, next) => {
 
     let { name, email, password, password_confirmation } = req.body;
@@ -17,24 +17,23 @@ exports.signup = (req: Request, res: Response, next) => {
 
     // Error Checking
     if (!name) {
-        errors.push({ name: "required" });
+        errors.push({ name: "Name required" });
     }
     if (!email) {
-        errors.push({ email: "required" });
+        errors.push({ email: "Email required" });
     }
     if (!emailRegexp.test(email)) {
-        errors.push({ email: "invalid" });
+        errors.push({ email: "Invalid email" });
     }
     if (!password) {
-        errors.push({ password: "required" });
+        errors.push({ password: "Password required" });
     }
     if (!password_confirmation) {
         errors.push({
-            password_confirmation: "required",
-        });
+            password_confirmation: "Password required"});
     }
     if (password != password_confirmation) {
-        errors.push({ password: "mismatch" });
+        errors.push({ password: "Passwords do not match" });
     }
     if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
@@ -44,7 +43,7 @@ exports.signup = (req: Request, res: Response, next) => {
     therapistModel.findOne({ email: email })
         .then(user => {
             if (user) {
-                return res.status(422).json({ errors: [{ user: "email already exists" }] });
+                return res.status(422).json({ errors: [{ user: "Email already exists" }] });
             } else {
                 const user = new therapistModel({
                     name: name,
@@ -72,25 +71,25 @@ exports.signup = (req: Request, res: Response, next) => {
             }
         }).catch(err => {
             res.status(500).json({
-                errors: [{ error: 'Something went wrong' }]
+                errors: [{ error: 'Server error' }]
             });
         })
 }
 
-// Sign In
+// Therapist Sign In
 exports.signin = async (req, res) => {
     let { email, password } = req.body;
     let errors = [];
 
     // Error Checking
     if (!email) {
-        errors.push({ email: "required" });
+        errors.push({ email: "Email required" });
     }
     if (!emailRegexp.test(email)) {
-        errors.push({ email: "invalid email" });
+        errors.push({ email: "Invalid email" });
     }
     if (!password) {
-        errors.push({ passowrd: "required" });
+        errors.push({ password: "Password required" });
     }
     if (errors.length > 0) {
         return res.status(422).json({ errors: errors });
@@ -100,13 +99,13 @@ exports.signin = async (req, res) => {
     therapistModel.findOne({ email: email }).then(user => {
         if (!user) {
             return res.status(404).json({
-                errors: [{ user: "not found" }],
+                errors: [{ user: "User not found" }],
             });
         } else {
             bcrypt.compare(password, user.password).then(isMatch => {
                 if (!isMatch) {
                     return res.status(400).json({
-                        errors: [{ password: "incorrect" }]
+                        errors: [{ password: "Password is incorrect" }]
                     });
                 }
                 let access_token = createJWT(
@@ -131,13 +130,13 @@ exports.signin = async (req, res) => {
                 });
             }).catch(err => {
                 res.status(500).json({
-                    errors: [{ error: 'Comaprison Error' , err}]
+                    errors: [{ error: 'Comparison Error' , err}]
                 });
             });
         }
     }).catch(err => {
         res.status(500).json({
-            errors: [{ error: 'Something went wrong', err }]
+            errors: [{ error: 'Server error', err }]
         });
     });
 }
