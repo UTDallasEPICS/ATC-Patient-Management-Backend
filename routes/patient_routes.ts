@@ -43,15 +43,6 @@ export default Router()
 
 })
 
-.delete('/', async(req: Request, res: Response)=>{
-    try {
-        let patients = await patientModel.deleteMany({});
-        return res.json({ success: true });
-    }
-    catch (err: any) {
-        return res.json({ success: false, err }); 
-    }
-})
 .delete('/:id', async(req: Request, res: Response)=>{
     try {
         let patients = await patientModel.findByIdAndDelete(req.params.id);
