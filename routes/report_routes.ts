@@ -30,15 +30,7 @@ export default Router()
     }
 
 })
-.delete('/', async(req: Request, res: Response)=>{
-    try {
-        await reportModel.deleteMany({});
-        return res.json({ success: true });
-    }
-    catch (err: any) {
-        return res.json({ success: false, err }); 
-    }
-})
+
 .delete('/:id', async(req: Request, res: Response)=>{
     try {
         await reportModel.findByIdAndDelete(req.params.id);
