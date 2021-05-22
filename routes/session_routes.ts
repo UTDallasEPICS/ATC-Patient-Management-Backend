@@ -27,11 +27,11 @@ export default Router()
         return res.json({ success: false, err }); 
     }
 })
-//working 
+//need testing  
 .get('/patient/:id', async(req:Request,res:Response)=>{
     try{
-        let patient = await patientModel.find({patientID: req.params.id});
-        return res.json({success:true, "patient":patient});
+        let session = await sessionModel.find({patientID: req.params.id});
+        return res.json({success:true, "session":session});
     }
     catch(err:any){
         return res.json({success:false,err});
@@ -48,15 +48,7 @@ export default Router()
     }
 
 })
-.delete('/', async(req: Request, res: Response)=>{
-    try {
-        await sessionModel.deleteMany({});
-        return res.json({ success: true });
-    }
-    catch (err: any) {
-        return res.json({ success: false, err }); 
-    }
-})
+
 .delete('/:id', async(req: Request, res: Response)=>{
     try {
         await sessionModel.findByIdAndDelete(req.params.id);

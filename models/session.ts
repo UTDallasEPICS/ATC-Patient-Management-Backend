@@ -9,6 +9,7 @@ class Session {
   public data: object;
   @prop({ ref: () => "Patient" })
   public patient: Patient;
+  
  // @prop({ ref: () => "Therapist" })
   //public therapist: Therapist;
   
