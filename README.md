@@ -14,8 +14,8 @@ ATC Patient Management Backend
 
 # Table of Contents
 
-- [Installation]()
-- [Usage]()
+- [Installation](https://github.com/UTDallasEPICS/ATC-Patient-Management-Backend#installation)
+- [Usage](https://github.com/UTDallasEPICS/ATC-Patient-Management-Backend#usage)
 
 # Installation
 
