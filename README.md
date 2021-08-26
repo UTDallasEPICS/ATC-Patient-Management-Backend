@@ -19,6 +19,8 @@ ATC Patient Management Backend
 
 # Installation
 
+**Note:** Many of us built the project through [Visual Studio Code](https://code.visualstudio.com/) however alternatives should still work
+ 
 To build this project, you will need to install [Node.js](https://nodejs.org/en/)
 
 This will allow you to install all the packages from the [package.json](https://github.com/UTDallasEPICS/ATC-Patient-Management-Backend/blob/main/package.json) file with one of the following commands:
