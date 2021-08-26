@@ -31,7 +31,7 @@ npm install
 
 We used [Docker](https://www.docker.com/) to streamline the server connection process, and recommend that you do so too. This will allow you to set up the mongo container. 
 
-If you are using Windows, we also recommend that you look through the windows setup under [Docker Docs](https://docs.docker.com/get-docker/) to help setup the program as windows has a few external requirements. With windows, you can choose to either use the WSL 2 backend, Hyper-V backend, or set up a VM in a different OS, such as Linux, to run Docker from.
+If you are using Windows, we also recommend that you look through the Windows setup under [Docker Docs](https://docs.docker.com/get-docker/) to help setup the program as windows has a few external requirements. With windows, you can choose to either use the WSL 2 backend, Hyper-V backend, or set up a VM in a different OS, such as Linux, to run Docker from.
 
 Once your Docker is set up and you are connected to the Mongoose server, use the following command to run it:
 ```
