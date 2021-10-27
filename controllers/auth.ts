@@ -5,9 +5,6 @@ import * as bcrypt from "bcrypt";
 import { createJWT } from "../utils/auth";
 import { validationResult } from "express-validator";
 
-const emailRegexp =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
 // Therapist Sign Up
 export const signup = (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
