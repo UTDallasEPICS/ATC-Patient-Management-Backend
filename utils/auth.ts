@@ -1,16 +1,15 @@
 const jswt = require("jsonwebtoken");
-exports.createJWT = (email, userId, duration) => {
+export const createJWT = (email, userId, duration) => {
     const payload = {
         email,
         userId,
-        duration
+        duration,
     };
     try {
         return jswt.sign(payload, process.env.TOKEN_SECRET, {
             expiresIn: duration,
         });
-    }
-    catch(e) {
+    } catch (e) {
         console.error(e);
         throw e;
     }
