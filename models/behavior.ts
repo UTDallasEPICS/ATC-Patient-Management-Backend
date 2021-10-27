@@ -11,6 +11,11 @@ export class Behavior {
     }
 }
 
+/**
+ * Represent a behavior in the report, in which there is information about the
+ * kind of data that therapist wants to keep track of
+ *
+ */
 export interface BehaviorInSession {
     name: string;
     description: string;

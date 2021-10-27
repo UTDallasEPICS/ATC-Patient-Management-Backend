@@ -20,6 +20,12 @@ class Program {
         return await this.save();
     }
 
+    /**
+     *
+     * Fetch a behavior template with given ID and then add its copy to the current program
+     *
+     * @param behaviorId id of behavior template that needs to be added
+     */
     public async addBehavior(this: DocumentType<Program>, behaviorId: string) {
         const behaviorTemplate = await behaviorModel.findById(behaviorId);
         this.behaviours.push(behaviorTemplate);

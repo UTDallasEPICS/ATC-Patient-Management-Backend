@@ -24,6 +24,13 @@ class Report {
         return await this.save();
     }
 
+    /**
+     *
+     * Create a new report from a program
+     *
+     * @param program program from which a new report will be created
+     * @returns a templated report that therapists will fill out on the frontend
+     */
     public static async createFromProgram(
         this: ReturnModelType<typeof Report>,
         program: Program
