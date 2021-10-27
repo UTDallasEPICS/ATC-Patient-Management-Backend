@@ -19,7 +19,7 @@
    "homepage": "https://github.com/UTDallasEPICS/ATC-Patient-Management-Backend#readme",
    "dependencies": {
       "@typegoose/typegoose": "^7.4.6",
-      "@types/express": "^4.17.8",
+      "@types/express": "^4.17.2",
       "@types/mongoose": "^5.10.3",
       "@typescript-eslint/eslint-plugin": "^4.8.1",
       "@typescript-eslint/parser": "^4.8.1",
