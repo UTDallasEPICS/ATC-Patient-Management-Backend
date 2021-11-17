@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { json } from "body-parser";
 import routes from "./routes";
+import cors from "cors";
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -12,6 +13,7 @@ mongoose
     .then(() => {
         express()
             .use(json())
+            .use(cors())
             //?.use(bodyParser.urlencoded({ extended: true }))
             .use("/", routes)
             .listen(8080, () => {
