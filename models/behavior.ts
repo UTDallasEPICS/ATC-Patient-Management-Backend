@@ -5,6 +5,8 @@ export class Behavior {
     public name: string;
     @prop()
     public description: string;
+    @prop()
+    public datatype: string;
 
     public async updateSelf(this: DocumentType<Behavior>, data: any) {
         return await this.save();
@@ -19,9 +21,7 @@ export class Behavior {
 export interface BehaviorInSession {
     name: string;
     description: string;
-    datatype: string;
     dataclass: string;
-    data: any;
 }
 
 export const behaviorModel = getModelForClass(Behavior);
