@@ -1,31 +1,33 @@
-import { getModelForClass, prop, DocumentType } from '@typegoose/typegoose';
-import { Program, Report, Administrator, Therapist } from '.';
+import { getModelForClass, prop, DocumentType } from "@typegoose/typegoose";
+import { Program, Report, Administrator, Therapist } from ".";
 class Patient {
-  @prop()
-  public firstName: string;
-  @prop()
-  public lastName: string;
-  @prop()
-  public email: string;
-  @prop()
-  public parentPhone: string;
-  @prop()
-  public parentEmail: string;
+    @prop()
+    public firstName: string;
+    @prop()
+    public lastName: string;
+    @prop()
+    public email: string;
+    @prop()
+    public parentPhone: string;
+    @prop()
+    public parentEmail: string;
+    @prop()
+    public birthday: Date;
 
-  @prop({ ref: () => "Program" })
-  public program: Program;
-  @prop({ ref: () => "Report" })
-  public reports: Report[];
-  @prop({ ref: () => "Therapist" })
-  public therapist: Therapist;
-  @prop({ ref: () => "Administrator" })
-  public administrator: Administrator
+    @prop({ ref: () => "Program" })
+    public program: Program;
+    @prop({ ref: () => "Report" })
+    public reports: Report[];
+    @prop({ ref: () => "Therapist" })
+    public therapist: Therapist;
+    @prop({ ref: () => "Administrator" })
+    public administrator: Administrator;
 
-  public async updateSelf(this: DocumentType<Patient>, data: any) {
-    return await this.save()
-  }
+    public async updateSelf(this: DocumentType<Patient>, data: any) {
+        return await this.save();
+    }
 }
 
-const patientModel = getModelForClass(Patient)
+const patientModel = getModelForClass(Patient);
 
-export {patientModel, Patient}
+export { patientModel, Patient };
