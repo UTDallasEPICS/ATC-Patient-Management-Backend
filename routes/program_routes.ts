@@ -30,6 +30,8 @@ router.post("/", async (req: Request, res: Response) => {
       });
     }
     let program = await programModel.findOrCreate(patient);
+    const { name, description, datatype } = req.body;
+    await program.addBehavior({ name, description, datatype });
     await program.save();
     return res.json({ success: true, data: program });
   } catch (err: any) {

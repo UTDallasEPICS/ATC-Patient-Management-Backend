@@ -39,9 +39,9 @@ class Program {
 
   /**
    *
-   * Fetch a behavior template with given ID and then add its copy to the current program
+   * Add a behavior object into the current program
    *
-   * @param behaviorId id of behavior template that needs to be added
+   * @param behavior behavior that needs to be added
    */
   public async addBehavior(this: DocumentType<Program>, behavior: IBehavior) {
     this.behaviours.push({
