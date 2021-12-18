@@ -1,16 +1,33 @@
 // TODO: we need to pull out all that discussion we had around behaviors, reports, and customizability
-import { getModelForClass, prop, DocumentType } from '@typegoose/typegoose';
-class Behavior {
+import { getModelForClass, prop, DocumentType } from "@typegoose/typegoose";
+
+export interface IBehavior {
+  name: string;
+  description: string;
+  datatype: string;
+}
+export class Behavior implements IBehavior {
   @prop()
   public name: string;
   @prop()
   public description: string;
+  @prop()
+  public datatype: string;
 
   public async updateSelf(this: DocumentType<Behavior>, data: any) {
-    return await this.save()
+    return await this.save();
   }
 }
 
-const behaviorModel = getModelForClass(Behavior)
+/**
+ * Represent a behavior in the report, in which there is information about the
+ * kind of data that therapist wants to keep track of
+ *
+ */
+export interface BehaviorInSession {
+  name: string;
+  description: string;
+  dataclass: string;
+}
 
-export {behaviorModel, Behavior}
+export const behaviorModel = getModelForClass(Behavior);
