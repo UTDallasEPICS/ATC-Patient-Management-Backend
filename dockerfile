@@ -6,4 +6,4 @@ WORKDIR /
 
 COPY createTable.js /docker-entrypoint-initdb.d/createTable.js
 
-EXPOSE 27107
+EXPOSE 27017
