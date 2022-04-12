@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", async (req: Request, res: Response) => {
   try {
-    let patients = await patientModel.find({});
+    const patients = await patientModel.find({});
     return res.json({ success: true, data: patients });
   } catch (err: any) {
     return res.json({ success: false, err });
@@ -14,7 +14,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 router.get("/:id", async (req: Request, res: Response) => {
   try {
-    let patients = await patientModel.findById(req.params.id);
+    const patients = await patientModel.findById(req.params.id);
     return res.json({ success: true, data: patients });
   } catch (err: any) {
     return res.json({ success: false, err });
@@ -42,7 +42,7 @@ router.delete(
   async (req: Request, res: Response) => {
     try {
       const patient = await patientModel.findById(req.params.patientId);
-      let program = await programModel.find({ patient });
+      const program = await programModel.find({ patient });
       program[0].behaviours = program[0].behaviours.filter(
         (behavior) => behavior.id !== req.params.behaviorId
       );
@@ -58,7 +58,7 @@ router.delete(
 );
 router.get("/report/:id", async (req: Request, res: Response) => {
   try {
-    let report = await reportModel.find({ patientID: req.params.id });
+    const report = await reportModel.find({ patientID: req.params.id });
     return res.json({ success: true, data: report });
   } catch (err: any) {
     return res.json({ success: false, err });
@@ -67,7 +67,7 @@ router.get("/report/:id", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
   try {
-    let savedPatient = await new patientModel(req.body).save();
+    const savedPatient = await new patientModel(req.body).save();
     return res.json({ success: true, data: savedPatient._id });
   } catch (err: any) {
     return res.json({ success: false, err });
@@ -76,7 +76,7 @@ router.post("/", async (req: Request, res: Response) => {
 
 router.delete("/:id", async (req: Request, res: Response) => {
   try {
-    let patients = await patientModel.findByIdAndDelete(req.params.id);
+    const patients = await patientModel.findByIdAndDelete(req.params.id);
     return res.json({ success: true });
   } catch (err: any) {
     return res.json({ success: false, err });
@@ -84,7 +84,7 @@ router.delete("/:id", async (req: Request, res: Response) => {
 });
 router.patch("/:id", async (req, res) => {
   try {
-    let patients = await patientModel.findByIdAndUpdate(
+    const patients = await patientModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
