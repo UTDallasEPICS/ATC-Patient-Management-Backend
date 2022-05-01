@@ -5,7 +5,7 @@ import { Router, Request, Response } from 'express';
 export default Router()
 .get('/', async (req: Request, res: Response) => {
     try {
-        let therapists = await therapistModel.find({});
+        const therapists = await therapistModel.find({});
         return res.json({ success: true, "data": therapists });
     }
     catch (err: any) {
@@ -15,7 +15,7 @@ export default Router()
 })
 .get('/:id', async(req: Request, res: Response) => {
     try {
-        let therapists = await therapistModel.findById(req.params.id);
+        const therapists = await therapistModel.findById(req.params.id);
         return res.json({ success: true, "data": therapists });
     }
     catch (err: any) {
@@ -26,7 +26,7 @@ export default Router()
 
 .get('/patient/:id', async(req: Request, res: Response) =>{
     try {
-        let patient = await patientModel.find({patientID: req.params.id});
+        const patient = await patientModel.find({patientID: req.params.id});
         return res.json({success: true, "data": patient});
     }
     catch (err: any){
@@ -36,7 +36,7 @@ export default Router()
 
 .post('/', async(req: Request, res: Response)=>{
     try {
-        let savedTherapist = await new therapistModel(req.body).save();
+        const savedTherapist = await new therapistModel(req.body).save();
         return res.json({ success: true, "data": savedTherapist._id });
     }
     catch (err: any) {
@@ -58,7 +58,7 @@ export default Router()
 
 .patch('/:id', async(req,res) => {
     try{
-        let therapists = await therapistModel.findByIdAndUpdate(req.params.id, req.body,{new:true} );
+        const therapists = await therapistModel.findByIdAndUpdate(req.params.id, req.body,{new:true} );
         return res.json({success: true, "data": therapists});
     }
     catch(err: any){

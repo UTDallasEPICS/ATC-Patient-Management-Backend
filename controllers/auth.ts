@@ -17,7 +17,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
             }),
         });
     }
-    let { name, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     // Create Therapist Sign In
     therapistModel
@@ -73,7 +73,7 @@ export const signin = async (req, res) => {
         });
     }
 
-    let { email, password } = req.body;
+    const { email, password } = req.body;
 
     // Validate Therapist Sign In
     therapistModel
@@ -92,7 +92,7 @@ export const signin = async (req, res) => {
                                 errors: [{ password: "Password is incorrect" }],
                             });
                         }
-                        let access_token = createJWT(
+                        const access_token = createJWT(
                             user.email,
                             user._id,
                             3600

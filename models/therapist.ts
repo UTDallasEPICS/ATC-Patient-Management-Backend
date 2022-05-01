@@ -1,5 +1,6 @@
 import { getModelForClass, prop, DocumentType } from '@typegoose/typegoose';
 import {Patient} from ".";
+
 class Therapist {
   @prop()
   public firstName: string;
@@ -13,8 +14,8 @@ class Therapist {
   public password: string;
   @prop()
   public phoneNumber: string;
-  @prop()
-  public isAdmin: boolean; // TODO: get rid of administrator type, and reference isTherapist and isAdmin props
+  //@prop()
+  //public isAdmin: boolean; // TODO: get rid of administrator type, and reference isTherapist and isAdmin props
 
   @prop({ ref: () => "Patient" })
   public patients: Patient[];
