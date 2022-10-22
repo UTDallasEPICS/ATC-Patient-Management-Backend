@@ -6,7 +6,7 @@ import {
   DocumentType,
   ReturnModelType,
 } from "@typegoose/typegoose";
-import { Patient, Program, Therapist } from ".";
+import { Patient, Program, Employee } from ".";
 import { BehaviorInSession } from "./behavior";
 class Report {
   @prop()
@@ -15,8 +15,8 @@ class Report {
   public data: object;
   @prop({ ref: () => "Patient" })
   public patient: Patient;
-  @prop({ ref: () => "Therapist" })
-  public therapist: Therapist;
+  @prop({ ref: () => "Employee" })
+  public employee: Employee;
   @prop()
   public behaviors: BehaviorInSession[];
 

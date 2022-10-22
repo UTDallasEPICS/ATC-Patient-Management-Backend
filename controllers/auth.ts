@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { therapistModel } from "../models";
+import { employeeModel } from "../models";
 import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
 import { createJWT } from "../utils/auth";
@@ -20,7 +20,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
     let { name, email, password } = req.body;
 
     // Create Therapist Sign In
-    therapistModel
+    employeeModel
         .findOne({ email: email })
         .then((user) => {
             if (user) {
@@ -28,7 +28,7 @@ export const signup = (req: Request, res: Response, next: NextFunction) => {
                     .status(422)
                     .json({ errors: [{ user: "Email already exists" }] });
             } else {
-                const user = new therapistModel({
+                const user = new employeeModel({
                     name: name,
                     email: email,
                     password: password,
@@ -76,7 +76,7 @@ export const signin = async (req, res) => {
     let { email, password } = req.body;
 
     // Validate Therapist Sign In
-    therapistModel
+    employeeModel
         .findOne({ email: email })
         .then((user) => {
             if (!user) {

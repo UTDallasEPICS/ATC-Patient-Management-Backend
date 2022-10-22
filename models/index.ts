@@ -1,4 +1,4 @@
-import {Therapist, therapistModel} from "./therapist";
+import {Employee, employeeModel} from "./employee";
 import {Behavior, behaviorModel} from "./behavior";
 import {Patient, patientModel} from "./patient";
 import {Administrator, administratorModel} from "./administrator";
@@ -8,7 +8,7 @@ import {Report, reportModel} from "./report";
 const {signup, signin} = require("../controllers/auth")
 
 export {
-    Therapist, therapistModel,
+    Employee, employeeModel,
     Behavior, behaviorModel,
     Patient, patientModel,
     Administrator, administratorModel,
