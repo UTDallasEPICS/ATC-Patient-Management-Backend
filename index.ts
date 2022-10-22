@@ -1,27 +1,49 @@
 import express from "express";
 import mongoose from "mongoose";
-import { json, urlencoded } from "express";
-import routes from "./routes";
 import cors from "cors";
+import dotenv  from "dotenv";
+import routes from "./routes";
 
-const dotenv = require("dotenv");
-dotenv.config();
+// load the .env file if the server isn’t in production mode
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
-const uri = process.env.DB_URL || "127.0.0.1";
+const app = express();
+
+// any origin can get a response of the localhost server
+app.use(cors());
+
+// parse json for POST requests
+app.use(express.json());
+
+// parse urlencoded payloads alowing nested objects for PUT requests
+app.use(express.urlencoded({ extended: true }));
+
+// Use the routes defined in ./routes
+app.use("/", routes);
+
+const mongoURI = process.env.DB_URI || "mongodb://127.0.0.1/ATCBackend";
+
 mongoose
-  .connect("mongodb://" + uri + "/ATCBackend")
+  // Server connects to MongoDB server 
+  .connect(mongoURI, {
+    // these flags prevent a deprecation warning
+    // Need to up date Mongoose version to > 5.7.1 to remove warning 
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  
   .then(() => {
-    const app = express();
-    app.use(json());
-    app.use(urlencoded({ extended: true }));
-    app.use(cors());
+    console.log("\nConnected to MongoDB Server");
 
-    app.use("/", routes);
-
-    app.listen(8080, () => {
-      console.log("Application listening on 8080");
+    // set port, server listens for requests
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      console.log(`Application listening on port ${PORT}.`);
     });
   })
+
   .catch((err) => {
     console.log(err);
     process.exit(1);
