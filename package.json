@@ -5,7 +5,9 @@
    "main": "index.ts",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "startDatabase": "./runDatabase.sh",
+      "createDB": "./Scripts/createAndStartDatabase.sh",
+      "startDB": "./Scripts/startDatabase.sh",
+      "stopDB": "./Scripts/stopDatabase.sh",
       "start": "ts-node index.ts --inspect"
    },
    "repository": {
