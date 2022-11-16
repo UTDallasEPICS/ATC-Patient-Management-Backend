@@ -18,7 +18,7 @@ const config = {
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
   baseURL: 'http://localhost:8080',
-  clientID: 'xMTtm5dWb83pK1vwpHp7cCbA6pjjWK3L',
+  clientID: 'UAdvr0ooyHVrALfpjLSHJhzelNDPXvjR',
   issuerBaseURL: 'https://dev-w205xag6.us.auth0.com'
 };
 
