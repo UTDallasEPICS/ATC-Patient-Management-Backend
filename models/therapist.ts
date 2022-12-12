@@ -8,11 +8,15 @@ class Therapist {
   @prop()
   public email: string;
   @prop()
+  public birthday: Date;
+  @prop()
+  public phoneNumber: string;
+  @prop()
+  public otherInfo: string;
+  @prop()
   public username: string;
   @prop()
   public password: string;
-  @prop()
-  public phoneNumber: string;
   @prop()
   public isAdmin: boolean; // TODO: get rid of administrator type, and reference isTherapist and isAdmin props
 
