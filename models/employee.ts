@@ -11,7 +11,10 @@ class Employee {
   public phoneNumber: string;
   @prop()
   public role: string;
-
+  @prop()
+  public otherInfo: string;
+  @prop()
+  public birthday: Date;
   @prop()
   public username: string;
   @prop()
