@@ -1,0 +1,14 @@
+# Ignores files to speed up docker build process
+# otherwise the "Sending build context to Docker daemon" takes forever
+
+# Ignore everything
+#*
+
+# Ignore files and directories
+.vscode/
+node_modules/
+.env
+
+# Allow files and directories
+!/dockerfile
+
