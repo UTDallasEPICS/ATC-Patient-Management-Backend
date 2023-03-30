@@ -10,9 +10,9 @@ const router = Router();
 router.get("/", async (req: Request, res: Response) => {
     try {
         let behaviours = await behaviorModel.find({});
-        return res.json({ success: true, data: behaviours });
+        return (res as any).json({ success: true, data: behaviours });
     } catch (err: any) {
-        return res.json({ success: false, err });
+        return (res as any).json({ success: false, err });
     }
 });
 
@@ -41,9 +41,9 @@ router.get(
 router.post("/", async (req: Request<{}, {}, Behavior, {}>, res: Response) => {
     try {
         let savedBehaviour = await new behaviorModel(req.body).save();
-        return res.json({ success: true, data: savedBehaviour._id });
+        return (res as any).json({ success: true, data: savedBehaviour._id });
     } catch (err: any) {
-        return res.json({ success: false, err });
+        return (res as any).json({ success: false, err });
     }
 });
 
@@ -58,9 +58,9 @@ router.delete(
     async (req: Request<{ id: string }, {}, Behavior, {}>, res: Response) => {
         try {
             await behaviorModel.findByIdAndDelete(req.params.id);
-            return res.json({ success: true });
+            return (res as any).json({ success: true });
         } catch (err: any) {
-            return res.json({ success: false, err });
+            return (res as any).json({ success: false, err });
         }
     }
 );
@@ -80,9 +80,9 @@ router.patch(
                 req.body,
                 { new: true }
             );
-            return res.json({ success: true, data: behaviours });
+            return (res as any).json({ success: true, data: behaviours });
         } catch (err: any) {
-            return res.json({ success: false, err });
+            return (res as any).json({ success: false, err });
         }
     }
 );
