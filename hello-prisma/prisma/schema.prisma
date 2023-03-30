@@ -10,40 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  first_name String
-  last_name String
-  email String @unique 
-  id    Int      @id @default(autoincrement())
-  phone_number String
-  birthday DateTime
-  role Role @default(USER)
-
-}
-enum Role{
-  USER
-  ADMIN
-  PATIENT
-  EMPLOYEE
-}
-
-// do I just do seperate models 
-model Administrator {
-first_name String
-last_name String
-email String @unique 
-phone_number String
-isTherapist boolean
-}
-
-model
-//can i use a createMany command or nah?
-// do I create a boolean to figure out who is the User\
-//do i put type instead of enum
-
-
-
-
 model Behavior {
   name String
   description String
