@@ -18,30 +18,31 @@ model User {
   phone_number String
   birthday DateTime
   role Role @default(USER)
-
+  EmployeeProfile EmplyeeProfile? 
+  PatientProfile PatientProfile?
 }
 enum Role{
-  USER
-  ADMIN
   PATIENT
   EMPLOYEE
 }
-
-// do I just do seperate models 
-model Administrator {
-first_name String
-last_name String
-email String @unique 
-phone_number String
-isTherapist boolean
+//make two profiles for employee and patient
+//link to profiles for types of users (roles) 
+model EmployeeProfile{
+  Role EMPLOYEE
+  isTherapist Boolean?
+  isAdmin Boolean?
+  EmployeeProfile_id Int @id @default(autoincrement())
+  users users @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+   //do i put 'role' in references? 
 }
 
-model
-//can i use a createMany command or nah?
-// do I create a boolean to figure out who is the User\
-//do i put type instead of enum
-
-
+model PatientProfile{
+  Role PATIENT
+  isParent Boolean?
+  PatientProfile_id Int @id @default(autoincrement())
+  users users @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+ //same question here
+}
 
 
 model Behavior {
