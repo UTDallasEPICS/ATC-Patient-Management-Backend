@@ -20,28 +20,27 @@ model User {
   role Role @default(USER)
   EmployeeProfile EmplyeeProfile? 
   PatientProfile PatientProfile?
+  Dependents 
 }
-enum Role{
-  PATIENT
-  EMPLOYEE
+enum employee{
+  Admin
+  Therapist
+  Technician
 }
-//make two profiles for employee and patient
-//link to profiles for types of users (roles) 
+
 model EmployeeProfile{
-  Role EMPLOYEE
-  isTherapist Boolean?
-  isAdmin Boolean?
-  EmployeeProfile_id Int @id @default(autoincrement())
-  users users @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
-   //do i put 'role' in references? 
+  role Role @default(Technician)
+  id Int @id @default(autoincrement())
+  User User @relation(fields: [id], references: [id])
+   
 }
 
 model PatientProfile{
-  Role PATIENT
-  isParent Boolean?
-  PatientProfile_id Int @id @default(autoincrement())
-  users users @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
- //same question here
+ 
+ Guardians User[]  //guardian relation many to many link to User table instead
+  id Int @id @default(autoincrement())
+  User User @relation(fields: [id], references: [id])
+ 
 }
 
 
