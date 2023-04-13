@@ -52,7 +52,7 @@ model Behavior {
 
 model Report {
   sessionTime DateTime
-  data object
+  data Json
   patientId int
   employeeId int
   patient User @relation(fields: [patientId], references: [id])
@@ -61,6 +61,6 @@ model Report {
 
 model Program {
   programId int
-  patient @relation(fields: [programId], references: [user])
+  patient User @relation(fields: [programId], references: [id])
   behaviors @relation
 }
