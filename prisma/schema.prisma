@@ -20,7 +20,7 @@ model User {
   role Role @default(USER)
   EmployeeProfile EmplyeeProfile? 
   PatientProfile PatientProfile?
-  Dependents 
+  Dependents Guardians[] @relation("User to Guardian Link")
 }
 enum employee{
   Admin
@@ -36,8 +36,7 @@ model EmployeeProfile{
 }
 
 model PatientProfile{
- 
- Guardians User[]  //guardian relation many to many link to User table instead
+ Guardians User[] @relation("User to Guardian Link")//guardian relation many to many link to User table instead
   id Int @id @default(autoincrement())
   User User @relation(fields: [id], references: [id])
  
