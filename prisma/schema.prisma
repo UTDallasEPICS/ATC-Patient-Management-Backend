@@ -27,7 +27,10 @@ enum employee{
   Therapist
   Technician
 }
-
+//I looked at the frontend schema, 
+//I have an inquisition over the end part of the employee.js file
+//same with the studmet profile
+//should I take into account what I see in the Frontend for my schema in the backend?
 model EmployeeProfile{
   role Role @default(Technician)
   id Int @id @default(autoincrement())
