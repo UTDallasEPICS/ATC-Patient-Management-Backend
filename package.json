@@ -21,7 +21,7 @@
    },
    "homepage": "https://github.com/UTDallasEPICS/ATC-Patient-Management-Backend#readme",
    "dependencies": {
-      "@prisma/client": "^4.10.1",
+      "@prisma/client": "^4.11.0",
       "@typegoose/typegoose": "^7.4.6",
       "@types/bcrypt": "^5.0.0",
       "@types/cors": "^2.8.12",

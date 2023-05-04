@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  first_name String
+  last_name String
+  email String @unique 
+  id    Int      @id @default(autoincrement())
+  phone_number String
+  birthday DateTime
+  role Role @default(USER)
+  EmployeeProfile EmplyeeProfile? 
+  PatientProfile PatientProfile?
+  Dependents Guardians[] @relation("User to Guardian Link")
+}
+enum employee{
+  Admin
+  Therapist
+  Technician
+}
+model EmployeeProfile{
+  role Role @default(Technician)
+  id Int @id @default(autoincrement())
+  User User @relation(fields: [id], references: [id])
+   
+}
+
+model PatientProfile{
+ Guardians User[] @relation("User to Guardian Link")//guardian relation many to many link to User table instead
+  id Int @id @default(autoincrement())
+  User User @relation(fields: [id], references: [id])
+ 
+}
+
+
+model Behavior {
+  name String
+  description String
+}
+
+model Report {
+  sessionTime DateTime
+  data Json
+  patientId int
+  employeeId int
+  patient User @relation(fields: [patientId], references: [id])
+  employee User @relation(fields: [employeeId], references: [id])
+}
+
+model Program {
+  programId int
+  patient User @relation(fields: [programId], references: [id])
+  behaviors @relation
+}

@@ -22,7 +22,7 @@ if [ "$( docker container inspect -f '{{.State.Running}}' $container_name 2> /de
         # connects to MongoDB instance on mongodb://localhost:27017
         # Run container in background and print container ID
         # --rm flags wont work in conjunction with -d flag (removes container after it exits)
-    docker run --name $container_name --volume $container_name:/data/db --publish 27017:27017 --detach $image_name 2> /dev/null
+    docker run --name $container_name --volume $container_name:/var/lib/postgresql/data --publish 5432:5432 --detach $image_name 2> /dev/null
 
 # If container already exists
 else
