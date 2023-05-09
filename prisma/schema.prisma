@@ -18,14 +18,14 @@ model User {
   phone_number String
   birthday DateTime
   role Role @default(USER)
-  EmployeeProfile EmplyeeProfile? 
+  EmployeeProfile EmployeeProfile? 
   PatientProfile PatientProfile?
   Dependents Guardians[] @relation("User to Guardian Link")
 }
-enum employee{
+enum Role{
   Admin
-  Therapist
   Technician
+  BCBA
 }
 model EmployeeProfile{
   role Role @default(Technician)
@@ -45,19 +45,32 @@ model PatientProfile{
 model Behavior {
   name String
   description String
+  datatype Datatype @default(COUNT)
+  trialsPerEntry Int
+  entries String[]
+  tags String[] 
+  programs Program[] @relation("ProgramBehaviors")
 }
 
 model Report {
   sessionTime DateTime
   data Json
-  patientId int
-  employeeId int
+  patientId Int
+  employeeId Int
   patient User @relation(fields: [patientId], references: [id])
   employee User @relation(fields: [employeeId], references: [id])
 }
 
 model Program {
-  programId int
+  programId Int
   patient User @relation(fields: [programId], references: [id])
-  behaviors @relation
+  // many to many relation program will have multiple behaviors
+  Behaviors Behavior[] @relation("ProgramBehaviors")
+}
+
+enum Datatype {
+  BOOLEAN
+  COUNT
+  BOOLEAN_ARRAY
+  COUNT_ARRAY
 }
